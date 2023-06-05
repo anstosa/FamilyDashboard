@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: Roboto, sans-serif;
+    font-size: 62px;
+    @apply font-bold;
+    @apply bg-black text-white;
+    @apply min-h-screen min-w-full;
+  }
+}
+
+@layer components {
+  .icon {
+    font-size: 84px;
+    @apply w-12 h-12;
+    @apply h-12;
+    @apply flex items-center justify-center;
+  }
+}
