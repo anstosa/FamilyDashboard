@@ -43,7 +43,7 @@ export const formatPerson = (person?: Person): string => {
     case Person.Mama:
       return "Mama";
     case Person.Papa:
-      return "Mama";
+      return "Papa";
     case Person.School:
       return "School";
     case Person.Unknown:

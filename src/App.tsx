@@ -45,27 +45,97 @@ export const App: FunctionComponent = () => {
             {time.toFormat("cccc")}
           </Card>
           <Card className="w-1/2">
-            <Icon>schedule</Icon>
-            {time.toFormat("h:mm")}
+            {/* Bedtime 2 */}
+            <div
+              className={clsx(
+                "absolute top-0 left-0 h-full z-0",
+                "bg-slate-800"
+              )}
+              style={(() => {
+                const start = 0;
+                const end = 6;
+                const hours = end - start;
+                const section = hours / 24;
+                return { width: `${section * 100}%` };
+              })()}
+            />
+            {/* Nap */}
+            <div
+              className={clsx("absolute top-0 h-full z-0", "bg-slate-800")}
+              style={(() => {
+                const start = 13;
+                const end = 15;
+                const hours = end - start;
+                const width = hours / 24;
+                const left = start / 24;
+                return { width: `${width * 100}%`, left: `${left * 100}%` };
+              })()}
+            />
+            {/* Bedtime 1 */}
+            <div
+              className={clsx("absolute top-0 h-full z-0", "bg-slate-800")}
+              style={(() => {
+                const start = 19;
+                const end = 24;
+                const hours = end - start;
+                const width = hours / 24;
+                const left = start / 24;
+                return { width: `${width * 100}%`, left: `${left * 100}%` };
+              })()}
+            />
+            {/* Current Time */}
+            <div
+              className={clsx(
+                "absolute top-0 w-1 h-full z-10",
+                "bg-violet-500"
+              )}
+              style={{
+                left: ((): string => {
+                  const hours = time.hour + time.minute / 60;
+                  const progress = hours / 19;
+                  return `${progress * 100}%`;
+                })(),
+              }}
+            />
+            <Icon className="z-20">schedule</Icon>
+            <span className="z-20">{time.toFormat("h:mm")}</span>
           </Card>
         </CardGroup>
 
         {/* SCHOOL */}
         <CardGroup>
           {data?.isSchoolDay ? (
-            <Card className="w-1/2">
+            <Card className="w-1/3">
               <Icon>backpack</Icon>
-              School Day
+              School
             </Card>
           ) : (
-            <Card className="w-1/2">
+            <Card className="w-1/3">
               <Icon>house</Icon>
-              Home Day
+              Home
             </Card>
           )}
-          <Card className="w-1/2" disabled={!data?.isSchoolDay}>
-            <Icon>directions_car</Icon>
+          <Card
+            className={clsx("w-1/3", getPersonBg(data?.dropoff))}
+            disabled={!data?.isSchoolDay}
+          >
+            <div className="flex gap-4">
+              <Icon>directions_car</Icon>
+              <Icon>arrow_right</Icon>
+              <Icon>store</Icon>
+            </div>
             {formatPerson(data?.dropoff)}
+          </Card>
+          <Card
+            className={clsx("w-1/3", getPersonBg(data?.pickup))}
+            disabled={!data?.isSchoolDay}
+          >
+            <div className="flex gap-4">
+              <Icon>store</Icon>
+              <Icon>arrow_right</Icon>
+              <Icon>directions_car</Icon>
+            </div>
+            {formatPerson(data?.pickup)}
           </Card>
         </CardGroup>
 

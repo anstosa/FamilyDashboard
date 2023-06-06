@@ -16,7 +16,7 @@ export const Card: FunctionComponent<Properties> = ({
     <div
       className={clsx(
         className?.includes("bg-") ? "" : "bg-slate-700",
-        "rounded-lg  p-8",
+        "rounded-lg overflow-hidden p-8 relative",
         "flex flex-col items-center justify-evenly",
         "flex-grow",
         { "opacity-50 blur": disabled },
