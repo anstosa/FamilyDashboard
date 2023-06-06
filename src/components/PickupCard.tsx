@@ -13,14 +13,14 @@ export const PickupCard: FunctionComponent<Properties> = ({
   className,
 }) => (
   <Card
-    className={clsx(className, getPersonBg(data?.dropoff))}
+    className={clsx(className, getPersonBg(data?.pickup))}
     disabled={!data?.isSchoolDay}
   >
     <div className="flex gap-4">
-      <Icon>directions_car</Icon>
-      <Icon>arrow_right</Icon>
       <Icon>store</Icon>
+      <Icon>arrow_right</Icon>
+      <Icon>directions_car</Icon>
     </div>
-    {formatPerson(data?.dropoff)}
+    {formatPerson(data?.pickup)}
   </Card>
 );
