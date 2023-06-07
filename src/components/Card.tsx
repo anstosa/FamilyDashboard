@@ -5,12 +5,14 @@ import { FunctionComponent } from "react";
 interface Properties extends PropsWithChildren {
   className?: string;
   disabled?: boolean;
+  onClick?: () => void;
 }
 
 export const Card: FunctionComponent<Properties> = ({
   disabled = false,
   className,
   children,
+  onClick,
 }) => {
   return (
     <div
@@ -22,6 +24,7 @@ export const Card: FunctionComponent<Properties> = ({
         { "opacity-50 blur": disabled },
         className
       )}
+      onClick={onClick}
     >
       {children}
     </div>

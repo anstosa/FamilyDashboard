@@ -4,6 +4,9 @@ const API_URL =
 export enum Person {
   Mama = "mama",
   Papa = "papa",
+  Family = "family",
+  Nana = "nana",
+  Papum = "papum",
   School = "school",
   Unknown = "unknown",
 }
@@ -14,10 +17,8 @@ export const getPersonBg = (person?: Person): string => {
       return "bg-pink-700";
     case Person.Papa:
       return "bg-blue-700";
-    case Person.School:
-      return "";
-    case Person.Unknown:
-      return "";
+    case Person.Family:
+      return "bg-gradient-to-r from-blue-700 to-pink-700";
     default:
       return "";
   }
@@ -29,10 +30,6 @@ export const getPersonText = (person?: Person): string => {
       return "text-pink-700";
     case Person.Papa:
       return "text-blue-700";
-    case Person.School:
-      return "";
-    case Person.Unknown:
-      return "";
     default:
       return "";
   }
@@ -44,6 +41,12 @@ export const formatPerson = (person?: Person): string => {
       return "Mama";
     case Person.Papa:
       return "Papa";
+    case Person.Family:
+      return "Family";
+    case Person.Nana:
+      return "Nana";
+    case Person.Papum:
+      return "Papum";
     case Person.School:
       return "School";
     case Person.Unknown:

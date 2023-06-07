@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { Card } from "./Card";
 import { Icon } from "./Icon";
 import { DateTime } from "luxon";
@@ -22,8 +22,10 @@ export const TimeCard: FunctionComponent<Properties> = ({
   time,
   className,
 }) => {
+  const [showTicks, setShowTicks] = useState<boolean>(false);
+
   return (
-    <Card className={className}>
+    <Card className={className} onClick={() => setShowTicks(!showTicks)}>
       {/* Bedtime Morning */}
       <div
         title="Bedtime (Morning)"
@@ -33,6 +35,21 @@ export const TimeCard: FunctionComponent<Properties> = ({
           return { left: 0, right: `calc(100% - ${getPercentOfDay(end)}%)` };
         })()}
       />
+
+      {showTicks &&
+        [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((hour) => (
+          <div
+            className="absolute w-px h-1 bg-white top-0 z-30 opacity-50"
+            style={(() => {
+              const tick = getAdjustedHours(hour);
+              return { left: `${getPercentOfDay(tick)}%` };
+            })()}
+          >
+            <span className="text-xs -ml-1 absolute top-2">
+              {hour > 12 ? hour - 12 : hour}
+            </span>
+          </div>
+        ))}
 
       {/* Nap */}
       <div
@@ -65,13 +82,10 @@ export const TimeCard: FunctionComponent<Properties> = ({
             "absolute top-0 w-1 -ml-[2px] h-full z-10",
             "bg-violet-500"
           )}
-          style={{
-            left: ((): string => {
-              const hours = time.hour + time.minute / 60 - DAY_START;
-              const now = hours / 19;
-              return `${now * 100}%`;
-            })(),
-          }}
+          style={(() => {
+            const start = getAdjustedHours(time.hour + time.minute / 60);
+            return { left: `${getPercentOfDay(start)}%` };
+          })()}
         />
       )}
 
