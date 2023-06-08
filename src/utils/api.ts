@@ -50,7 +50,7 @@ export const formatPerson = (person?: Person): string => {
     case Person.School:
       return "School";
     case Person.Unknown:
-      return "?????";
+      return "";
     default:
       return "Loading...";
   }
