@@ -10,7 +10,7 @@ interface Properties {
 }
 export const NapCard: FunctionComponent<Properties> = ({ data, className }) => (
   <Card
-    className={clsx(className, getPersonBg(data?.bedtime))}
+    className={clsx(className, getPersonBg(data?.nap))}
     disabled={data?.isSchoolDay}
   >
     <Icon>bed</Icon>
