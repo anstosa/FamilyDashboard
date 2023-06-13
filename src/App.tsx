@@ -30,7 +30,7 @@ export const App: FunctionComponent = () => {
     }, 1000 * 60);
 
     // reload every 24 hours
-    setTimeout(window.location.reload, 1000 * 60 * 60 * 24);
+    setInterval(window.location.reload, 1000 * 60 * 60 * 24);
   }, []);
 
   return (

@@ -74,6 +74,7 @@ export const getData = async (): Promise<APIResponse> => {
       const response = await fetch(API_URL);
       const body = await response.json();
       resolve(body);
+      isFetching = undefined;
     });
     return isFetching;
   }
