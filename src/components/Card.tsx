@@ -24,7 +24,12 @@ export const Card: FunctionComponent<Properties> = ({
         { "opacity-50 blur": disabled },
         className
       )}
-      onClick={onClick}
+      onClick={(event) => {
+        if (onClick) {
+          event.stopPropagation();
+          onClick();
+        }
+      }}
     >
       {children}
     </div>

@@ -17,20 +17,20 @@ export const App: FunctionComponent = () => {
   const [time, setTime] = useState<DateTime>(DateTime.local());
   const isLoading = typeof data === "undefined";
 
+  const refresh = async () => {
+    setData(undefined);
+    setData(await getData());
+    setTime(DateTime.local());
+  };
+
   useEffect(() => {
-    (async () => {
-      // get initial data
-      setData(await getData());
-    })();
+    refresh();
 
     // refresh data every minute
-    setInterval(async () => {
-      setData(await getData());
-      setTime(DateTime.local());
-    }, 1000 * 60);
+    setInterval(refresh, 1000 * 60);
 
     // reload every 24 hours
-    setInterval(window.location.reload, 1000 * 60 * 60 * 24);
+    setTimeout(() => window.location.reload, 1000 * 60 * 60 * 24);
   }, []);
 
   return (
@@ -43,6 +43,7 @@ export const App: FunctionComponent = () => {
             blur: isLoading,
           }
         )}
+        onClick={refresh}
       >
         {/* DATE + TIME */}
         <CardGroup>

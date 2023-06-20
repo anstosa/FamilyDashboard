@@ -40,6 +40,7 @@ export const TimeCard: FunctionComponent<Properties> = ({
         [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((hour) => (
           <div
             className="absolute w-px h-1 bg-white top-0 z-30 opacity-50"
+            key={hour}
             style={(() => {
               const tick = getAdjustedHours(hour);
               return { left: `${getPercentOfDay(tick)}%` };
