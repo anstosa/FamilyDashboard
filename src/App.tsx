@@ -18,9 +18,11 @@ export const App: FunctionComponent = () => {
   const isLoading = typeof data === "undefined";
 
   const refresh = async () => {
-    setData(undefined);
-    setData(await getData());
     setTime(DateTime.local());
+    // if request times out, reload the page
+    const timeout = setTimeout(() => window.location.reload(), 1000 * 30);
+    setData(await getData());
+    clearTimeout(timeout);
   };
 
   useEffect(() => {
@@ -30,7 +32,7 @@ export const App: FunctionComponent = () => {
     setInterval(refresh, 1000 * 60);
 
     // reload every 24 hours
-    setTimeout(() => window.location.reload, 1000 * 60 * 60 * 24);
+    setTimeout(() => window.location.reload(), 1000 * 60 * 60 * 24);
   }, []);
 
   return (
